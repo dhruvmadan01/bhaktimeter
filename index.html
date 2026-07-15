@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Modi Bhakti Meter</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <header class="page-header">
+      <img src="bjplogo.png" alt="BJP Logo" class="brand-logo" />
+      <div class="header-copy">
+        <p class="eyebrow">Official bhagwa vibes only</p>
+        <h1>Modi Bhakti Meter</h1>
+        <p>Answer the questions, then discover your Modi love score, heart rank, and your bhagwa relation title.</p>
+      </div>
+    </header>
+
+    <main class="meter-layout">
+      <section class="meter-panel">
+        <div class="meter-hero">
+          <img src="modi.jpg" alt="Modiji" class="modi-photo" />
+          <div class="meter-intro">
+            <span class="badge">Bhagwa Meter</span>
+            <h2>How much do you really love Modiji?</h2>
+            <p>Be honest. Your answers decide your Bhakti %, your place in his heart, and your final title.</p>
+          </div>
+        </div>
+
+        <form id="quizForm" class="quiz-form">
+          <div class="question-block">
+            <label>1. How often do you chant "Jai Shri Ram" before starting the day?</label>
+            <div class="options">
+              <label><input type="radio" name="q1" value="5" /> Never</label>
+              <label><input type="radio" name="q1" value="15" /> Sometimes</label>
+              <label><input type="radio" name="q1" value="25" /> Often</label>
+              <label><input type="radio" name="q1" value="35" /> Every day</label>
+            </div>
+          </div>
+
+          <div class="question-block">
+            <label>2. If Modi's speech is on TV, what do you do?</label>
+            <div class="options">
+              <label><input type="radio" name="q2" value="5" /> Ignore it</label>
+              <label><input type="radio" name="q2" value="15" /> Glance at it</label>
+              <label><input type="radio" name="q2" value="25" /> Listen closely</label>
+              <label><input type="radio" name="q2" value="35" /> Stop everything</label>
+            </div>
+          </div>
+
+          <div class="question-block">
+            <label>3. How many Modiji photos are saved on your phone?</label>
+            <div class="options">
+              <label><input type="radio" name="q3" value="5" /> 0-1</label>
+              <label><input type="radio" name="q3" value="15" /> 2-5</label>
+              <label><input type="radio" name="q3" value="25" /> 6-15</label>
+              <label><input type="radio" name="q3" value="35" /> More than 15</label>
+            </div>
+          </div>
+
+          <div class="question-block">
+            <label>4. How do you feel about BJP decisions?</label>
+            <div class="options">
+              <label><input type="radio" name="q4" value="5" /> I question them</label>
+              <label><input type="radio" name="q4" value="15" /> I follow some</label>
+              <label><input type="radio" name="q4" value="25" /> I support most</label>
+              <label><input type="radio" name="q4" value="35" /> I agree completely</label>
+            </div>
+          </div>
+        </form>
+
+        <div class="actions">
+          <button id="calculateBtn" class="btn-primary">Check My Bhakti</button>
+          <button id="resetBtn" class="btn-secondary hidden">Retake Meter</button>
+        </div>
+
+        <section id="result" class="result-card hidden">
+          <div class="result-top">
+            <img src="bjplogo.png" alt="BJP Logo" class="result-logo" />
+            <div>
+              <h3>Your Modi Bhakti Result</h3>
+              <p>What your bhagwa score decides about your relation with Modiji.</p>
+            </div>
+          </div>
+
+          <div class="result-values">
+            <div>
+              <p class="result-label">Bhakti Score</p>
+              <p class="result-number"><span id="percentage">0</span>%</p>
+            </div>
+            <div>
+              <p class="result-label">Heart Rank</p>
+              <p class="result-number"><span id="rank">0</span>/10</p>
+            </div>
+            <div>
+              <p class="result-label">Relation Title</p>
+              <p class="result-title" id="titleText">-</p>
+            </div>
+          </div>
+
+          <p class="result-description" id="descriptionText"></p>
+        </section>
+      </section>
+    </main>
+
+    <footer class="page-footer">
+      <p>Made with bhagwa energy. Not affiliated with any official campaign.</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
