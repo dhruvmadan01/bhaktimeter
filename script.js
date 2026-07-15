@@ -6,6 +6,19 @@ const percentageEl = document.getElementById("percentage");
 const rankEl = document.getElementById("rank");
 const titleEl = document.getElementById("titleText");
 const descriptionEl = document.getElementById("descriptionText");
+const shareBtn = document.getElementById("shareBtn");
+const pulseFill = document.getElementById("pulseFill");
+const toast = document.getElementById("toast");
+
+function showToast(message) {
+  toast.textContent = message;
+  toast.classList.remove("hidden");
+  toast.classList.add("toast-show");
+  setTimeout(() => {
+    toast.classList.remove("toast-show");
+    toast.classList.add("hidden");
+  }, 2100);
+}
 
 function getAnswerValue(name) {
   const answer = form.elements[name];
@@ -60,12 +73,19 @@ function showResult(score) {
   rankEl.textContent = rank;
   titleEl.textContent = title;
   descriptionEl.textContent = description;
+  pulseFill.style.width = `${score}%`;
   resultCard.classList.remove("hidden");
   resetBtn.classList.remove("hidden");
   calculateBtn.textContent = "Update My Meter";
 }
 
 function resetForm() {
+  form.reset();
+  resultCard.classList.add("hidden");
+  resetBtn.classList.add("hidden");
+  calculateBtn.textContent = "Check My Bhakti";
+  pulseFill.style.width = "0%";
+}
   form.reset();
   resultCard.classList.add("hidden");
   resetBtn.classList.add("hidden");
@@ -89,3 +109,33 @@ calculateBtn.addEventListener("click", () => {
 });
 
 resetBtn.addEventListener("click", resetForm);
+
+shareBtn.addEventListener("click", () => {
+  const score = percentageEl.textContent;
+  const rank = rankEl.textContent;
+  const title = titleEl.textContent;
+  const shareText = `My Modi Bhakti Meter result: ${score}% bhakti, heart rank ${rank}, title ${title}. Dare your friends to check their bhagwa score!`;
+
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(shareText).then(() => {
+      showToast("Result copied. Share the bhagwa meter!");
+    }).catch(() => {
+      showToast("Could not copy. Try again.");
+    });
+  } else {
+    const fallback = document.createElement("textarea");
+    fallback.value = shareText;
+    fallback.setAttribute("readonly", "");
+    fallback.style.position = "absolute";
+    fallback.style.left = "-9999px";
+    document.body.appendChild(fallback);
+    fallback.select();
+    try {
+      document.execCommand("copy");
+      showToast("Result copied. Share the bhagwa meter!");
+    } catch {
+      showToast("Could not copy. Try again.");
+    }
+    document.body.removeChild(fallback);
+  }
+});
