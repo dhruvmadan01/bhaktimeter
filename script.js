@@ -7,6 +7,7 @@ const rankEl = document.getElementById("rank");
 const titleEl = document.getElementById("titleText");
 const descriptionEl = document.getElementById("descriptionText");
 const shareBtn = document.getElementById("shareBtn");
+const whatsappBtn = document.getElementById("whatsappBtn");
 const pulseFill = document.getElementById("pulseFill");
 const toast = document.getElementById("toast");
 
@@ -134,4 +135,14 @@ shareBtn.addEventListener("click", () => {
     }
     document.body.removeChild(fallback);
   }
+});
+
+whatsappBtn.addEventListener("click", () => {
+  const score = percentageEl.textContent;
+  const rank = rankEl.textContent;
+  const title = titleEl.textContent;
+  const shareText = `My Modi Bhakti Meter result: ${score}% bhakti, heart rank ${rank}, title ${title}. Check it at bhaktimeter.vercel.app and dare your friends to see their bhagwa score!`;
+  const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`;
+
+  window.open(whatsappUrl, "_blank");
 });
