@@ -86,13 +86,9 @@ function resetForm() {
   calculateBtn.textContent = "Check My Bhakti";
   pulseFill.style.width = "0%";
 }
-  form.reset();
-  resultCard.classList.add("hidden");
-  resetBtn.classList.add("hidden");
-  calculateBtn.textContent = "Check My Bhakti";
-}
 
-calculateBtn.addEventListener("click", () => {
+calculateBtn.addEventListener("click", (event) => {
+  event.preventDefault();
   const q1 = getAnswerValue("q1");
   const q2 = getAnswerValue("q2");
   const q3 = getAnswerValue("q3");
