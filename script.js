@@ -138,11 +138,6 @@ shareBtn.addEventListener("click", () => {
 });
 
 whatsappBtn.addEventListener("click", () => {
-  const score = percentageEl.textContent;
-  const rank = rankEl.textContent;
-  const title = titleEl.textContent;
-  const shareText = `My Modi Bhakti Meter result: ${score}% bhakti, heart rank ${rank}, title ${title}. Check it at bhaktimeter.vercel.app and dare your friends to see their bhagwa score!`;
-  const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`;
-
+  const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent("Check your bhagwa score on Modi Bhakti Meter: https://bhaktimeter.vercel.app")}`;
   window.open(whatsappUrl, "_blank");
 });
