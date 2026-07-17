@@ -157,9 +157,9 @@ copyUpiBtn.addEventListener("click", () => {
 verifyPaymentBtn.addEventListener("click", () => {
   const utrValue = utrInput.value.trim();
   
-  // Validate UTR/Txn Ref: 12-digit numeric code
-  const numericRegex = /^\d{12}$/;
-  if (!numericRegex.test(utrValue)) {
+  // Validate UTR/Txn Ref: 12 alphanumeric characters or digits (accepts any random 12-digit/character code)
+  const alphanumericRegex = /^[a-zA-Z0-9]{12}$/;
+  if (!alphanumericRegex.test(utrValue)) {
     alert("Please enter a valid 12-digit UPI Reference Number / UTR / Transaction ID.");
     return;
   }

@@ -176,7 +176,7 @@
         <div class="verification-box">
           <label for="utrInput">Enter 12-Digit UPI Ref No. (UTR) / Txn ID:</label>
           <div class="verification-input-group">
-            <input type="text" id="utrInput" placeholder="e.g. 345678901234" maxlength="12" pattern="\d{12}" />
+            <input type="text" id="utrInput" placeholder="e.g. 345678901234" maxlength="12" pattern="[a-zA-Z0-9]{12}" />
             <button type="button" id="verifyPaymentBtn" class="btn-primary">Unlock Score</button>
           </div>
           <p class="verification-hint">Required for payment reconciliation and validation.</p>
