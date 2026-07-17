@@ -1,4 +1,4 @@
-﻿const form = document.getElementById("quizForm");
+const form = document.getElementById("quizForm");
 const calculateBtn = document.getElementById("calculateBtn");
 const resetBtn = document.getElementById("resetBtn");
 const resultCard = document.getElementById("result");
@@ -10,6 +10,17 @@ const shareBtn = document.getElementById("shareBtn");
 const whatsappBtn = document.getElementById("whatsappBtn");
 const pulseFill = document.getElementById("pulseFill");
 const toast = document.getElementById("toast");
+
+// Payment Modal Selectors
+const paymentModal = document.getElementById("paymentModal");
+const closePaymentBtn = document.getElementById("closePaymentBtn");
+const copyUpiBtn = document.getElementById("copyUpiBtn");
+const verifyPaymentBtn = document.getElementById("verifyPaymentBtn");
+const utrInput = document.getElementById("utrInput");
+const paymentSpinner = document.getElementById("paymentSpinner");
+const spinnerStatus = document.getElementById("spinnerStatus");
+
+let pendingScore = null;
 
 function showToast(message) {
   toast.textContent = message;
@@ -101,8 +112,78 @@ calculateBtn.addEventListener("click", (event) => {
   }
 
   const total = q1 + q2 + q3 + q4;
-  const score = Math.round(Math.min(100, Math.max(0, total / 1.2)));
-  showResult(score);
+  pendingScore = Math.round(Math.min(100, Math.max(0, total / 1.2)));
+  
+  // Clear any previous input and open payment modal
+  utrInput.value = "";
+  paymentSpinner.classList.add("hidden");
+  paymentModal.classList.remove("hidden");
+});
+
+// Close Payment Modal
+closePaymentBtn.addEventListener("click", () => {
+  paymentModal.classList.add("hidden");
+  pendingScore = null;
+});
+
+// Copy UPI ID function
+copyUpiBtn.addEventListener("click", () => {
+  const upiIdText = "9315095214@fam";
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(upiIdText).then(() => {
+      showToast("UPI ID copied. Complete the ₹9 payment!");
+    }).catch(() => {
+      showToast("Failed to copy. Please manually copy: " + upiIdText);
+    });
+  } else {
+    const fallback = document.createElement("textarea");
+    fallback.value = upiIdText;
+    fallback.setAttribute("readonly", "");
+    fallback.style.position = "absolute";
+    fallback.style.left = "-9999px";
+    document.body.appendChild(fallback);
+    fallback.select();
+    try {
+      document.execCommand("copy");
+      showToast("UPI ID copied. Complete the ₹9 payment!");
+    } catch {
+      showToast("Failed to copy. Please manually copy: " + upiIdText);
+    }
+    document.body.removeChild(fallback);
+  }
+});
+
+// Verify Payment Simulation
+verifyPaymentBtn.addEventListener("click", () => {
+  const utrValue = utrInput.value.trim();
+  
+  // Validate UTR/Txn Ref: 12-digit numeric code
+  const numericRegex = /^\d{12}$/;
+  if (!numericRegex.test(utrValue)) {
+    alert("Please enter a valid 12-digit UPI Reference Number / UTR / Transaction ID.");
+    return;
+  }
+
+  // Show spinner overlay and simulate verification stages
+  paymentSpinner.classList.remove("hidden");
+  spinnerStatus.textContent = "Connecting to UPI gateway...";
+
+  setTimeout(() => {
+    spinnerStatus.textContent = "Verifying transaction settlement...";
+    
+    setTimeout(() => {
+      paymentSpinner.classList.add("hidden");
+      paymentModal.classList.add("hidden");
+      
+      // Verification complete, show final score
+      showResult(pendingScore);
+      
+      // Scroll smoothly to results
+      resultCard.scrollIntoView({ behavior: "smooth" });
+      showToast("Payment verified successfully! Jai Shri Ram!");
+      pendingScore = null;
+    }, 1200);
+  }, 1000);
 });
 
 resetBtn.addEventListener("click", resetForm);

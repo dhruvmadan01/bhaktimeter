@@ -138,6 +138,61 @@
     </footer>
   </div>
 
+  <!-- UPI Payment Modal -->
+  <div id="paymentModal" class="modal-overlay hidden">
+    <div class="modal-content">
+      <button type="button" id="closePaymentBtn" class="close-button">&times;</button>
+      
+      <div class="payment-header">
+        <span class="payment-badge">Secure UPI Payment</span>
+        <h2>Unlock Your Bhakti Score</h2>
+        <p class="payment-subtitle">To view your score, heart rank, and title, complete a small support payment of ₹9.</p>
+      </div>
+
+      <div class="payment-body">
+        <div class="qr-container">
+          <img id="upiQrCode" src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=upi%3A%2F%2Fpay%3Fpa%3D9315095214%40fam%26pn%3DDhruv%2520Madan%26am%3D9%26cu%3DINR%26tn%3DModi%2520Bhakti%2520Meter" alt="Scan to Pay" class="qr-image" />
+          <p class="qr-hint">Scan with GPay, PhonePe, Paytm, or BHIM</p>
+        </div>
+
+        <div class="payment-details">
+          <div class="detail-row">
+            <span class="detail-label">Amount Due:</span>
+            <span class="detail-value highlight">₹9.00</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">UPI ID:</span>
+            <span class="detail-value select-all" id="upiIdText">9315095214@fam</span>
+          </div>
+        </div>
+
+        <div class="payment-actions">
+          <button type="button" id="copyUpiBtn" class="btn-secondary">Copy UPI ID</button>
+          <a href="upi://pay?pa=9315095214@fam&pn=Dhruv%20Madan&am=9&cu=INR&tn=Modi%20Bhakti%20Meter" class="btn-primary mobile-pay-btn" id="mobilePayLink">
+            Pay via UPI App
+          </a>
+        </div>
+
+        <div class="verification-box">
+          <label for="utrInput">Enter 12-Digit UPI Ref No. (UTR) / Txn ID:</label>
+          <div class="verification-input-group">
+            <input type="text" id="utrInput" placeholder="e.g. 345678901234" maxlength="12" pattern="\d{12}" />
+            <button type="button" id="verifyPaymentBtn" class="btn-primary">Unlock Score</button>
+          </div>
+          <p class="verification-hint">Required for payment reconciliation and validation.</p>
+        </div>
+
+        <!-- Verification Spinner Screen -->
+        <div id="paymentSpinner" class="spinner-overlay hidden">
+          <div class="spinner-content">
+            <div class="spinner"></div>
+            <p id="spinnerStatus">Verifying transaction...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3538711509086814"
      crossorigin="anonymous"></script>
   <script src="script.js"></script>
