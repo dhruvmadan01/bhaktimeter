@@ -16,7 +16,7 @@ const paymentModal = document.getElementById("paymentModal");
 const closePaymentBtn = document.getElementById("closePaymentBtn");
 const copyUpiBtn = document.getElementById("copyUpiBtn");
 const verifyPaymentBtn = document.getElementById("verifyPaymentBtn");
-const utrInput = document.getElementById("utrInput");
+const payerNameInput = document.getElementById("payerNameInput");
 const paymentSpinner = document.getElementById("paymentSpinner");
 const spinnerStatus = document.getElementById("spinnerStatus");
 
@@ -115,7 +115,7 @@ calculateBtn.addEventListener("click", (event) => {
   pendingScore = Math.round(Math.min(100, Math.max(0, total / 1.2)));
   
   // Clear any previous input and open payment modal
-  utrInput.value = "";
+  payerNameInput.value = "";
   paymentSpinner.classList.add("hidden");
   paymentModal.classList.remove("hidden");
 });
@@ -153,37 +153,40 @@ copyUpiBtn.addEventListener("click", () => {
   }
 });
 
-// Verify Payment Simulation
+// Verify Payment Simulation (10-second GPay Name verification)
 verifyPaymentBtn.addEventListener("click", () => {
-  const utrValue = utrInput.value.trim();
+  const payerName = payerNameInput.value.trim();
   
-  // Validate UTR/Txn Ref: 12 alphanumeric characters or digits (accepts any random 12-digit/character code)
-  const alphanumericRegex = /^[a-zA-Z0-9]{12}$/;
-  if (!alphanumericRegex.test(utrValue)) {
-    alert("Please enter a valid 12-digit UPI Reference Number / UTR / Transaction ID.");
+  if (payerName.length < 3) {
+    alert("Please enter your name as shown in GPay / UPI app (at least 3 letters).");
     return;
   }
 
-  // Show spinner overlay and simulate verification stages
+  // Show spinner overlay and simulate 10-second ledger checks
   paymentSpinner.classList.remove("hidden");
-  spinnerStatus.textContent = "Connecting to UPI gateway...";
+  spinnerStatus.textContent = "Connecting to FamPay ledger...";
 
+  // Phase 2: Scan incoming records for this user (3.5s delay)
   setTimeout(() => {
-    spinnerStatus.textContent = "Verifying transaction settlement...";
+    spinnerStatus.textContent = `Scanning incoming transactions for "${payerName}"...`;
     
+    // Phase 3: Verify the ₹9 amount status (3.5s delay)
     setTimeout(() => {
-      paymentSpinner.classList.add("hidden");
-      paymentModal.classList.add("hidden");
+      spinnerStatus.textContent = "Matching payment receipt for ₹9.00...";
       
-      // Verification complete, show final score
-      showResult(pendingScore);
-      
-      // Scroll smoothly to results
-      resultCard.scrollIntoView({ behavior: "smooth" });
-      showToast("Payment verified successfully! Jai Shri Ram!");
-      pendingScore = null;
-    }, 1200);
-  }, 1000);
+      // Phase 4: Resolution (3s delay)
+      setTimeout(() => {
+        paymentSpinner.classList.add("hidden");
+        paymentModal.classList.add("hidden");
+        
+        // Success: unlock result and scroll
+        showResult(pendingScore);
+        resultCard.scrollIntoView({ behavior: "smooth" });
+        showToast("Payment verified! Score unlocked successfully.");
+        pendingScore = null;
+      }, 3000);
+    }, 3500);
+  }, 3500);
 });
 
 resetBtn.addEventListener("click", resetForm);

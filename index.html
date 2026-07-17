@@ -166,20 +166,29 @@
           </div>
         </div>
 
-        <div class="payment-actions">
-          <button type="button" id="copyUpiBtn" class="btn-secondary">Copy UPI ID</button>
-          <a href="upi://pay?pa=9315095214@fam&pn=Dhruv%20Madan&am=9&cu=INR&tn=Modi%20Bhakti%20Meter" class="btn-primary mobile-pay-btn" id="mobilePayLink">
-            Pay via UPI App
-          </a>
+        <!-- Step 1: Input GPay Name -->
+        <div class="verification-box">
+          <label for="payerNameInput">1. Enter your Name (used on UPI app / GPay / FamPay):</label>
+          <div class="verification-input-group">
+            <input type="text" id="payerNameInput" placeholder="e.g. Rahul Sharma" required />
+          </div>
         </div>
 
-        <div class="verification-box">
-          <label for="utrInput">Enter 12-Digit UPI Ref No. (UTR) / Txn ID:</label>
-          <div class="verification-input-group">
-            <input type="text" id="utrInput" placeholder="e.g. 345678901234" maxlength="12" pattern="[a-zA-Z0-9]{12}" />
-            <button type="button" id="verifyPaymentBtn" class="btn-primary">Unlock Score</button>
+        <!-- Step 2: Pay & Unlock -->
+        <div class="payment-instructions-box">
+          <label class="step-label">2. Pay ₹9 and Unlock your score:</label>
+          <div class="payment-actions">
+            <button type="button" id="copyUpiBtn" class="btn-secondary">Copy UPI ID</button>
+            <a href="upi://pay?pa=9315095214@fam&pn=Dhruv%20Madan&am=9&cu=INR&tn=Modi%20Bhakti%20Meter" class="btn-primary mobile-pay-btn" id="mobilePayLink">
+              Pay via UPI App
+            </a>
           </div>
-          <p class="verification-hint">Required for payment reconciliation and validation.</p>
+          
+          <p class="mobile-fail-warning">
+            <strong>Mobile User?</strong> If "Pay via UPI App" fails to open your app, please <strong>screenshot the QR code above</strong>, open GPay/PhonePe/Paytm, and select <strong>Scan from Gallery / Upload Screenshot</strong>.
+          </p>
+          
+          <button type="button" id="verifyPaymentBtn" class="btn-primary unlock-full-btn">I Have Paid - Unlock Score</button>
         </div>
 
         <!-- Verification Spinner Screen -->
