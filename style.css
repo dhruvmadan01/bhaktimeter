@@ -614,6 +614,10 @@ body {
   z-index: 10;
 }
 
+.spinner-overlay.hidden {
+  display: none !important;
+}
+
 .spinner-content {
   text-align: center;
 }
