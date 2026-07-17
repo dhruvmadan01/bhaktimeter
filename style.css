@@ -722,3 +722,91 @@ body {
   border-color: var(--bhagwa);
   box-shadow: 0 0 0 3px rgba(255, 153, 51, 0.15);
 }
+
+/* WhatsApp Viral Loop Divider & Progress Box */
+.divider-row {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 22px 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.divider-row::before,
+.divider-row::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.divider-row:not(:empty)::before {
+  margin-right: .5em;
+}
+
+.divider-row:not(:empty)::after {
+  margin-left: .5em;
+}
+
+.viral-share-box {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: #f4fcf7;
+  border: 1px dashed rgba(37, 211, 102, 0.35);
+  border-radius: 20px;
+  padding: 20px;
+  margin-top: 10px;
+}
+
+.viral-share-box label {
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: var(--text);
+}
+
+.btn-whatsapp-share {
+  width: 100%;
+  border: none;
+  border-radius: 999px;
+  padding: 14px 20px;
+  font-size: 0.98rem;
+  font-weight: 700;
+  cursor: pointer;
+  background: #25d366;
+  color: white;
+  box-shadow: 0 10px 25px rgba(37, 211, 102, 0.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+}
+
+.btn-whatsapp-share:hover {
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: 0 14px 32px rgba(37, 211, 102, 0.3);
+  background: #20ba59;
+}
+
+.whatsapp-icon {
+  fill: currentColor;
+}
+
+.share-progress-track {
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(37, 211, 102, 0.12);
+  overflow: hidden;
+  position: relative;
+  margin-top: 4px;
+}
+
+.share-progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #34e073 0%, #1eaf53 100%);
+  width: 0%;
+  transition: width 0.4s ease-out;
+}

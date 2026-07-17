@@ -20,7 +20,13 @@ const payerNameInput = document.getElementById("payerNameInput");
 const paymentSpinner = document.getElementById("paymentSpinner");
 const spinnerStatus = document.getElementById("spinnerStatus");
 
+// WhatsApp Share selectors
+const whatsappShareUnlockBtn = document.getElementById("whatsappShareUnlockBtn");
+const whatsappCountText = document.getElementById("whatsappCountText");
+const shareProgressFill = document.getElementById("shareProgressFill");
+
 let pendingScore = null;
+let whatsappShares = 0;
 
 function showToast(message) {
   toast.textContent = message;
@@ -114,8 +120,11 @@ calculateBtn.addEventListener("click", (event) => {
   const total = q1 + q2 + q3 + q4;
   pendingScore = Math.round(Math.min(100, Math.max(0, total / 1.2)));
   
-  // Clear any previous input and open payment modal
+  // Clear any previous input, reset sharing progress, and open payment modal
   payerNameInput.value = "";
+  whatsappShares = 0;
+  whatsappCountText.textContent = "0/3";
+  shareProgressFill.style.width = "0%";
   paymentSpinner.classList.add("hidden");
   paymentModal.classList.remove("hidden");
 });
@@ -187,6 +196,52 @@ verifyPaymentBtn.addEventListener("click", () => {
       }, 3000);
     }, 3500);
   }, 3500);
+});
+
+// WhatsApp Share to Unlock logic
+whatsappShareUnlockBtn.addEventListener("click", () => {
+  const shareText = `Check your bhakti score, heart rank, and relation title with Modiji on Modi Bhakti Meter: https://bhaktimeter.vercel.app`;
+  const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`;
+  
+  // Open WhatsApp in a new tab
+  window.open(whatsappUrl, "_blank");
+
+  // Increment click shares
+  whatsappShares = Math.min(3, whatsappShares + 1);
+  
+  // Update progress UI
+  whatsappCountText.textContent = `${whatsappShares}/3`;
+  shareProgressFill.style.width = `${(whatsappShares / 3) * 100}%`;
+
+  if (whatsappShares === 1) {
+    showToast("Shared 1/3! Share with 2 more friends/groups on WhatsApp.");
+  } else if (whatsappShares === 2) {
+    showToast("Shared 2/3! Share with 1 more friend/group on WhatsApp.");
+  } else if (whatsappShares >= 3) {
+    // Show spinner overlay for simulated verification
+    paymentSpinner.classList.remove("hidden");
+    spinnerStatus.textContent = "Verifying WhatsApp shares...";
+
+    setTimeout(() => {
+      spinnerStatus.textContent = "Unlocking free access...";
+      
+      setTimeout(() => {
+        paymentSpinner.classList.add("hidden");
+        paymentModal.classList.add("hidden");
+        
+        // Success: unlock result and scroll
+        showResult(pendingScore);
+        resultCard.scrollIntoView({ behavior: "smooth" });
+        showToast("Access unlocked for free via sharing! Jai Shri Ram!");
+        
+        // Reset state
+        whatsappShares = 0;
+        whatsappCountText.textContent = "0/3";
+        shareProgressFill.style.width = "0%";
+        pendingScore = null;
+      }, 1200);
+    }, 1000);
+  }
 });
 
 resetBtn.addEventListener("click", resetForm);
