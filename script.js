@@ -6,11 +6,12 @@ const percentageEl = document.getElementById("percentage");
 const rankEl = document.getElementById("rank");
 const titleEl = document.getElementById("titleText");
 const descriptionEl = document.getElementById("descriptionText");
-const shareBtn = document.getElementById("shareBtn");
-const whatsappBtn = document.getElementById("whatsappBtn");
+const downloadCertBtn = document.getElementById("downloadCertBtn");
+const shareCertBtn = document.getElementById("shareCertBtn");
 const pulseFill = document.getElementById("pulseFill");
 const toast = document.getElementById("toast");
 
+// Payment Modal Selectors
 // Payment Modal Selectors
 const paymentModal = document.getElementById("paymentModal");
 const closePaymentBtn = document.getElementById("closePaymentBtn");
@@ -24,6 +25,21 @@ const spinnerStatus = document.getElementById("spinnerStatus");
 const whatsappShareUnlockBtn = document.getElementById("whatsappShareUnlockBtn");
 const whatsappCountText = document.getElementById("whatsappCountText");
 const shareProgressFill = document.getElementById("shareProgressFill");
+
+// Unlock & Results selectors
+const resultActions = document.getElementById("resultActions");
+const revealScoreBtn = document.getElementById("revealScoreBtn");
+
+// Certificate Preview elements
+const certBorder = document.getElementById("certBorder");
+const certMainTitle = document.getElementById("certMainTitle");
+const certRecipientName = document.getElementById("certRecipientName");
+const certScore = document.getElementById("certScore");
+const certRank = document.getElementById("certRank");
+const certRankTitle = document.getElementById("certRankTitle");
+const certPulseFill = document.getElementById("certPulseFill");
+const certStampText = document.getElementById("certStampText");
+const landingTeaser = document.getElementById("landingTeaser");
 
 let pendingScore = null;
 let whatsappShares = 0;
@@ -92,6 +108,32 @@ function showResult(score) {
   titleEl.textContent = title;
   descriptionEl.textContent = description;
   pulseFill.style.width = `${score}%`;
+
+  // Update Certificate Content
+  certScore.textContent = `${score}%`;
+  certRank.textContent = `${rank}/10`;
+  certRankTitle.textContent = title;
+  certPulseFill.style.width = `${score}%`;
+
+  if (score < 30) {
+    certBorder.classList.add("anti-national");
+    certMainTitle.textContent = "ANTI-NATIONAL REPORT CARD";
+    certStampText.textContent = "SUSPECT";
+  } else {
+    certBorder.classList.remove("anti-national");
+    certMainTitle.textContent = "CERTIFICATE OF FEALTY";
+    certStampText.textContent = "APPROVED";
+  }
+
+  // Set recipient name (use input if filled, otherwise default)
+  const nameVal = payerNameInput.value.trim();
+  certRecipientName.textContent = nameVal ? nameVal : "Your Name";
+
+  // Hide landing teaser when showing actual result
+  if (landingTeaser) {
+    landingTeaser.classList.add("hidden");
+  }
+
   resultCard.classList.remove("hidden");
   resetBtn.classList.remove("hidden");
   calculateBtn.textContent = "Update My Meter";
@@ -100,9 +142,18 @@ function showResult(score) {
 function resetForm() {
   form.reset();
   resultCard.classList.add("hidden");
+  resultCard.classList.remove("locked");
+  resultActions.classList.remove("hidden");
+  revealScoreBtn.classList.add("hidden");
   resetBtn.classList.add("hidden");
   calculateBtn.textContent = "Check My Bhakti";
   pulseFill.style.width = "0%";
+  certPulseFill.style.width = "0%";
+
+  // Show landing teaser when resetting
+  if (landingTeaser) {
+    landingTeaser.classList.remove("hidden");
+  }
 }
 
 calculateBtn.addEventListener("click", (event) => {
@@ -120,6 +171,13 @@ calculateBtn.addEventListener("click", (event) => {
   const total = q1 + q2 + q3 + q4;
   pendingScore = Math.round(Math.min(100, Math.max(0, total / 1.2)));
   
+  // Render results card immediately but blur/lock it
+  showResult(pendingScore);
+  resultCard.classList.add("locked");
+  resultActions.classList.add("hidden");
+  revealScoreBtn.classList.remove("hidden");
+  resultCard.scrollIntoView({ behavior: "smooth" });
+
   // Clear any previous input, reset sharing progress, and open payment modal
   payerNameInput.value = "";
   whatsappShares = 0;
@@ -189,6 +247,9 @@ verifyPaymentBtn.addEventListener("click", () => {
         paymentModal.classList.add("hidden");
         
         // Success: unlock result and scroll
+        resultCard.classList.remove("locked");
+        resultActions.classList.remove("hidden");
+        revealScoreBtn.classList.add("hidden");
         showResult(pendingScore);
         resultCard.scrollIntoView({ behavior: "smooth" });
         showToast("Payment verified! Score unlocked successfully.");
@@ -230,6 +291,9 @@ whatsappShareUnlockBtn.addEventListener("click", () => {
         paymentModal.classList.add("hidden");
         
         // Success: unlock result and scroll
+        resultCard.classList.remove("locked");
+        resultActions.classList.remove("hidden");
+        revealScoreBtn.classList.add("hidden");
         showResult(pendingScore);
         resultCard.scrollIntoView({ behavior: "smooth" });
         showToast("Access unlocked for free via sharing! Jai Shri Ram!");
@@ -246,37 +310,135 @@ whatsappShareUnlockBtn.addEventListener("click", () => {
 
 resetBtn.addEventListener("click", resetForm);
 
-shareBtn.addEventListener("click", () => {
+// Download Certificate PNG
+downloadCertBtn.addEventListener("click", () => {
+  const certElement = document.getElementById("bhaktiCertificate");
+  showToast("Rendering HD certificate...");
+  
+  const options = {
+    scale: 2,
+    useCORS: true,
+    allowTaint: true,
+    backgroundColor: "#ffffff"
+  };
+
+  html2canvas(certElement, options).then(canvas => {
+    canvas.toBlob(blob => {
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      
+      const score = percentageEl.textContent;
+      const titleName = titleEl.textContent.toLowerCase().replace(/\s+/g, "_");
+      link.download = `modi_bhakti_certificate_${score}_${titleName}.png`;
+      
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+      showToast("Certificate downloaded successfully!");
+    }, "image/png");
+  }).catch(() => {
+    showToast("Could not download certificate. Try taking a screenshot!");
+  });
+});
+
+// Share Certificate (Direct file share on mobile, download fallback on desktop)
+shareCertBtn.addEventListener("click", () => {
+  const certElement = document.getElementById("bhaktiCertificate");
   const score = percentageEl.textContent;
-  const rank = rankEl.textContent;
   const title = titleEl.textContent;
-  const shareText = `My Modi Bhakti Meter result: ${score}% bhakti, heart rank ${rank}, title ${title}. Check it at bhaktimeter.vercel.app and dare your friends to see their bhagwa score!`;
+  const shareText = `Check out my Modi Bhakti Certificate: ${score}% Bhakti, title "${title}". Test yours at https://bhaktimeter.vercel.app !`;
+  
+  showToast("Preparing sharing image...");
 
-  if (navigator.clipboard && window.isSecureContext) {
-    navigator.clipboard.writeText(shareText).then(() => {
-      showToast("Result copied. Share the bhagwa meter!");
-    }).catch(() => {
-      showToast("Could not copy. Try again.");
-    });
-  } else {
-    const fallback = document.createElement("textarea");
-    fallback.value = shareText;
-    fallback.setAttribute("readonly", "");
-    fallback.style.position = "absolute";
-    fallback.style.left = "-9999px";
-    document.body.appendChild(fallback);
-    fallback.select();
-    try {
-      document.execCommand("copy");
-      showToast("Result copied. Share the bhagwa meter!");
-    } catch {
-      showToast("Could not copy. Try again.");
-    }
-    document.body.removeChild(fallback);
-  }
+  const options = {
+    scale: 2,
+    useCORS: true,
+    allowTaint: true,
+    backgroundColor: "#ffffff"
+  };
+
+  html2canvas(certElement, options).then(canvas => {
+    canvas.toBlob(blob => {
+      const file = new File([blob], "bhakti_certificate.png", { type: "image/png" });
+      
+      // Try native sharing (direct attachment support on mobile)
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        navigator.share({
+          files: [file],
+          title: "Modi Bhakti Certificate",
+          text: shareText
+        }).then(() => {
+          showToast("Shared successfully!");
+        }).catch(err => {
+          console.log("Share cancelled or failed:", err);
+          fallbackTextShare(shareText);
+        });
+      } else {
+        // Fallback: download and redirect to WhatsApp
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "bhakti_certificate.png";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+
+        showToast("Certificate downloaded! Redirecting to WhatsApp...");
+        setTimeout(() => {
+          fallbackTextShare(shareText);
+        }, 1500);
+      }
+    }, "image/png");
+  }).catch(() => {
+    fallbackTextShare(shareText);
+  });
 });
 
-whatsappBtn.addEventListener("click", () => {
-  const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent("Check your bhagwa score on Modi Bhakti Meter: https://bhaktimeter.vercel.app")}`;
+function fallbackTextShare(shareText) {
+  const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`;
   window.open(whatsappUrl, "_blank");
+}
+
+// Re-open modal if they click reveal button
+revealScoreBtn.addEventListener("click", () => {
+  paymentModal.classList.remove("hidden");
 });
+
+// Reflect name input live on certificate
+payerNameInput.addEventListener("input", () => {
+  const nameVal = payerNameInput.value.trim();
+  certRecipientName.textContent = nameVal ? nameVal : "Your Name";
+});
+
+// Recent Transactions Ticker Logic
+const tickerNames = ["Rahul", "Priya", "Amit", "Sneha", "Vikram", "Anjali", "Rohan", "Neha", "Divya", "Sandeep", "Karan", "Pooja", "Aarav", "Kabir", "Meera", "Diya"];
+const tickerColleges = ["DU", "DTU", "IIT Delhi", "NSUT", "IP University", "VIT", "BITS Pilani", "SRM", "MU", "BHU", "RVCE", "MIT"];
+const tickerTitles = [
+  "Certified Bhakt Certificate",
+  "Anti-National Report Card",
+  "Rashtravaad Ke Sipahi Profile",
+  "Bhagwa Yodha Status"
+];
+
+function updateTicker() {
+  const name = tickerNames[Math.floor(Math.random() * tickerNames.length)];
+  const college = tickerColleges[Math.floor(Math.random() * tickerColleges.length)];
+  const title = tickerTitles[Math.floor(Math.random() * tickerTitles.length)];
+  const mins = Math.floor(Math.random() * 8) + 1; // 1 to 8 mins ago
+  
+  const tickerEl = document.getElementById("tickerText");
+  if (tickerEl) {
+    tickerEl.style.opacity = 0;
+    setTimeout(() => {
+      tickerEl.innerHTML = `⚡ <strong>${name}</strong> from <strong>${college}</strong> just unlocked their <em>${title}</em> (${mins} mins ago)`;
+      tickerEl.style.opacity = 1;
+    }, 350);
+  }
+}
+
+// Start ticker
+updateTicker();
+setInterval(updateTicker, 4000);

@@ -43,6 +43,59 @@
           </div>
         </div>
 
+        <!-- Teaser Demo Certificate shown on Page Load -->
+        <div id="landingTeaser" class="landing-teaser-box">
+          <p class="teaser-heading">⚡ Certificate You Will Unlock:</p>
+          <div class="certificate-card sample-preview">
+            <div class="watermark-overlay">SAMPLE</div>
+            <div class="cert-border">
+              <div class="cert-header">
+                <img src="bjplogo.png" alt="Logo" class="cert-logo" />
+                <div>
+                  <h4>OFFICIAL MODI BHAKTI COMMISSION</h4>
+                  <span class="cert-domain">bhaktimeter.vercel.app</span>
+                </div>
+              </div>
+              
+              <h2 class="cert-title">CERTIFICATE OF FEALTY</h2>
+              <p class="cert-subtitle">This document is proudly presented to</p>
+              <h3 class="cert-recipient">Rahul Sharma</h3>
+              
+              <div class="cert-metrics-grid">
+                <div class="cert-metric-item">
+                  <span class="cert-metric-lbl">Bhagwa Score</span>
+                  <span class="cert-metric-val">85%</span>
+                </div>
+                <div class="cert-metric-item">
+                  <span class="cert-metric-lbl">Heart Rank</span>
+                  <span class="cert-metric-val">9/10</span>
+                </div>
+                <div class="cert-metric-item">
+                  <span class="cert-metric-lbl">Title</span>
+                  <span class="cert-metric-val highlight">Rashtravaad Ke Sipahi</span>
+                </div>
+              </div>
+
+              <div class="cert-pulse-wrapper">
+                <span class="cert-pulse-lbl">Bhagwa Pulse:</span>
+                <div class="cert-pulse-track">
+                  <div class="cert-pulse-fill" style="width: 85%"></div>
+                </div>
+              </div>
+
+              <div class="cert-footer">
+                <div class="cert-signature">
+                  <div class="signature-line"></div>
+                  <span>Modi Bhakti Commission</span>
+                </div>
+                <div class="cert-stamp">
+                  <div class="stamp-circle">APPROVED</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <form id="quizForm" class="quiz-form">
           <div class="question-block">
             <label>1. How often do you chant "Jai Shri Ram" before starting the day?</label>
@@ -102,31 +155,89 @@
           <div class="result-values">
             <div>
               <p class="result-label">Bhakti Score</p>
-              <p class="result-number"><span id="percentage">0</span>%</p>
+              <p class="result-number"><span class="blur-target"><span id="percentage">0</span>%</span></p>
             </div>
             <div>
               <p class="result-label">Heart Rank</p>
-              <p class="result-number"><span id="rank">0</span>/10</p>
+              <p class="result-number"><span class="blur-target"><span id="rank">0</span>/10</span></p>
             </div>
             <div>
               <p class="result-label">Relation Title</p>
-              <p class="result-title" id="titleText">-</p>
+              <p class="result-title"><span class="blur-target" id="titleText">-</span></p>
             </div>
           </div>
 
           <div class="pulse-wrapper">
             <p class="pulse-label">Bhagwa Pulse</p>
-            <div class="pulse-track">
+            <div class="pulse-track blur-target">
               <div class="pulse-fill" id="pulseFill"></div>
             </div>
           </div>
 
-          <div class="result-actions">
-            <button type="button" id="shareBtn" class="btn-secondary">Share My Bhakti</button>
-            <button type="button" id="whatsappBtn" class="btn-primary">Share on WhatsApp</button>
+          <p class="result-description blur-target" id="descriptionText"></p>
+
+          <!-- Certificate Preview Area -->
+          <div class="certificate-preview-wrapper" id="certWrapper">
+            <div class="certificate-card" id="bhaktiCertificate">
+              <div class="watermark-overlay" id="certWatermark">LOCKED</div>
+              <div class="cert-border" id="certBorder">
+                <div class="cert-header">
+                  <img src="bjplogo.png" alt="Logo" class="cert-logo" />
+                  <div>
+                    <h4>OFFICIAL MODI BHAKTI COMMISSION</h4>
+                    <span class="cert-domain">bhaktimeter.vercel.app</span>
+                  </div>
+                </div>
+                
+                <h2 class="cert-title" id="certMainTitle">CERTIFICATE OF FEALTY</h2>
+                <p class="cert-subtitle">This document is proudly presented to</p>
+                
+                <h3 class="cert-recipient blur-target" id="certRecipientName">Rahul Sharma</h3>
+                
+                <div class="cert-metrics-grid">
+                  <div class="cert-metric-item">
+                    <span class="cert-metric-lbl">Bhagwa Score</span>
+                    <span class="cert-metric-val blur-target" id="certScore">85%</span>
+                  </div>
+                  <div class="cert-metric-item">
+                    <span class="cert-metric-lbl">Heart Rank</span>
+                    <span class="cert-metric-val blur-target" id="certRank">9/10</span>
+                  </div>
+                  <div class="cert-metric-item">
+                    <span class="cert-metric-lbl">Title</span>
+                    <span class="cert-metric-val blur-target highlight" id="certRankTitle">Rashtravaad Ke Sipahi</span>
+                  </div>
+                </div>
+
+                <div class="cert-pulse-wrapper">
+                  <span class="cert-pulse-lbl">Bhagwa Pulse:</span>
+                  <div class="cert-pulse-track blur-target">
+                    <div class="cert-pulse-fill" id="certPulseFill" style="width: 0%"></div>
+                  </div>
+                </div>
+
+                <div class="cert-footer">
+                  <div class="cert-signature">
+                    <div class="signature-line"></div>
+                    <span>Modi Bhakti Commission</span>
+                  </div>
+                  <div class="cert-stamp">
+                    <div class="stamp-circle" id="certStampText">APPROVED</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p class="cert-caption">
+              Pay ₹9 to instantly remove the watermark, unlock your custom name, and download the HD version for your Instagram Story.
+            </p>
           </div>
 
-          <p class="result-description" id="descriptionText"></p>
+          <div class="result-actions" id="resultActions">
+            <button type="button" id="downloadCertBtn" class="btn-secondary">Download Certificate</button>
+            <button type="button" id="shareCertBtn" class="btn-primary">Share Certificate on WhatsApp</button>
+          </div>
+
+          <button type="button" id="revealScoreBtn" class="btn-primary unlock-banner-btn hidden">🔒 Unlock Relationship Title & Profile</button>
 
           <div class="toast hidden" id="toast">Copied to clipboard! Spread the bhagwa meter.</div>
         </section>
@@ -148,6 +259,8 @@
         <h2>Unlock Your Bhakti Score</h2>
         <p class="payment-subtitle">To view your score, heart rank, and title, complete a small support payment of ₹9.</p>
       </div>
+
+
 
       <div class="payment-body">
         <div class="qr-container">
@@ -194,6 +307,13 @@
           </div>
         </div>
 
+        <!-- Recent Transactions Ticker -->
+        <div class="ticker-box">
+          <div class="ticker-content" id="tickerText">
+            ⚡ Loading recent unlocks...
+          </div>
+        </div>
+
         <!-- Verification Spinner Screen -->
         <div id="paymentSpinner" class="spinner-overlay hidden">
           <div class="spinner-content">
@@ -207,6 +327,7 @@
 
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3538711509086814"
      crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

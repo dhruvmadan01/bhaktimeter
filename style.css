@@ -336,24 +336,29 @@ body {
 }
 
 .toast {
+  position: fixed;
+  top: 24px;
+  left: 50%;
+  transform: translate(-50%, -20px);
+  opacity: 0;
+  transition: opacity 300ms ease, transform 300ms ease;
+  z-index: 9999; /* must be higher than modal overlay (1000) */
+  pointer-events: none;
+  
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-top: 18px;
-  padding: 12px 16px;
+  padding: 12px 22px;
   border-radius: 999px;
   background: #fff7e1;
   color: var(--dark-bhagwa);
-  border: 1px solid rgba(255,153,51,0.28);
-  box-shadow: 0 12px 25px rgba(255,153,51,0.12);
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 220ms ease, transform 220ms ease;
+  border: 1px solid rgba(255,153,51,0.35);
+  box-shadow: 0 12px 32px rgba(255,153,51,0.22);
 }
 
 .toast.toast-show {
   opacity: 1;
-  transform: translateY(0);
+  transform: translate(-50%, 0);
 }
 
 .page-footer {
@@ -643,10 +648,7 @@ body {
   font-size: 1rem;
 }
 
-/* Adjust Toast style for high modal layers */
-#toast {
-  z-index: 2000;
-}
+
 
 @media (max-width: 500px) {
   .payment-actions {
@@ -809,4 +811,400 @@ body {
   background: linear-gradient(90deg, #34e073 0%, #1eaf53 100%);
   width: 0%;
   transition: width 0.4s ease-out;
+}
+
+/* Blurred Preview Locked State */
+.result-card.locked .blur-target {
+  filter: blur(12px);
+  user-select: none;
+  pointer-events: none;
+  transition: filter 0.3s ease;
+  position: relative;
+  display: inline-block;
+  min-width: 60px;
+}
+
+.result-card.locked p.result-description.blur-target {
+  display: block;
+}
+
+.result-card.locked .blur-target::after {
+  content: '🔒';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.15rem;
+  filter: none !important;
+  opacity: 0.95;
+  z-index: 5;
+  color: var(--dark-bhagwa);
+}
+
+.result-card.locked p.result-description.blur-target::after {
+  font-size: 1.6rem;
+}
+
+.unlock-banner-btn {
+  width: 100%;
+  margin-top: 20px;
+  padding: 16px 24px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--bhagwa) 0%, #ff7c00 100%);
+  color: #212121;
+  box-shadow: 0 12px 30px rgba(255, 153, 51, 0.3);
+  border: none;
+  cursor: pointer;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+  animation: pulse 2.4s ease-in-out infinite;
+}
+
+.unlock-banner-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 16px 36px rgba(255, 153, 51, 0.4);
+}
+
+/* Certificate Preview Wrapper & Layout */
+.certificate-preview-wrapper {
+  margin-top: 28px;
+  text-align: center;
+}
+
+.certificate-card {
+  width: 100%;
+  max-width: 550px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 20px;
+  padding: 22px;
+  position: relative;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+/* Watermark styles */
+.watermark-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-30deg);
+  font-size: 3.8rem;
+  font-weight: 900;
+  color: rgba(255, 153, 51, 0.16);
+  border: 8px double rgba(255, 153, 51, 0.16);
+  padding: 8px 18px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  user-select: none;
+  pointer-events: none;
+  z-index: 10;
+  white-space: nowrap;
+}
+
+/* When the card is not locked, hide watermark */
+.result-card:not(.locked) .watermark-overlay {
+  display: none !important;
+}
+
+.result-card.locked #certWatermark {
+  color: rgba(239, 68, 68, 0.18) !important;
+  border-color: rgba(239, 68, 68, 0.18) !important;
+  content: "LOCKED";
+}
+
+.cert-border {
+  border: 4px double #d4af37; /* Gold border */
+  border-radius: 12px;
+  padding: 22px;
+  background: #fdfcf7;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.cert-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.cert-logo {
+  width: 40px;
+  height: auto;
+}
+
+.cert-header h4 {
+  margin: 0;
+  font-size: 0.7rem;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  font-weight: 700;
+}
+
+.cert-title {
+  margin: 0 0 6px;
+  font-size: 1.35rem;
+  letter-spacing: 0.05em;
+  color: #8b6508;
+  font-family: Georgia, serif;
+  font-weight: 800;
+}
+
+.cert-subtitle {
+  margin: 0 0 8px;
+  font-size: 0.78rem;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.cert-recipient {
+  margin: 8px 0;
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: var(--text);
+  font-family: Georgia, serif;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: rgba(0,0,0,0.1);
+}
+
+.cert-declaration {
+  margin: 6px 0;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.cert-score-badge {
+  display: inline-block;
+  background: rgba(255, 153, 51, 0.08);
+  color: var(--dark-bhagwa);
+  border: 1px solid rgba(255, 153, 51, 0.25);
+  font-size: 1.4rem;
+  font-weight: 900;
+  padding: 4px 18px;
+  border-radius: 8px;
+  margin: 6px 0;
+}
+
+.cert-rank-title {
+  margin: 6px 0 16px;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #b54f07;
+}
+
+.cert-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: 18px;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  padding-top: 12px;
+}
+
+.cert-signature {
+  text-align: left;
+}
+
+.signature-line {
+  width: 130px;
+  border-bottom: 1px solid var(--muted);
+  margin-bottom: 4px;
+}
+
+.cert-signature span {
+  font-size: 0.65rem;
+  color: var(--muted);
+}
+
+.cert-stamp {
+  width: 56px;
+  height: 56px;
+}
+
+.stamp-circle {
+  width: 56px;
+  height: 56px;
+  border: 3px dashed #d4af37;
+  color: #d4af37;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.62rem;
+  font-weight: 900;
+  transform: rotate(-15deg);
+  text-transform: uppercase;
+}
+
+.cert-caption {
+  margin-top: 14px;
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.5;
+  max-width: 440px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Alternate Certificate Style for Anti-National */
+.cert-border.anti-national {
+  border-color: #ef4444 !important;
+  background: #fffcfc !important;
+}
+
+.cert-border.anti-national .cert-title {
+  color: #b91c1c !important;
+}
+
+.cert-border.anti-national .cert-score-badge {
+  background: rgba(239, 68, 68, 0.1) !important;
+  color: #b91c1c !important;
+  border-color: rgba(239, 68, 68, 0.3) !important;
+}
+
+.cert-border.anti-national .cert-rank-title {
+  color: #b91c1c !important;
+}
+
+.cert-border.anti-national .stamp-circle {
+  border-color: #ef4444 !important;
+  color: #ef4444 !important;
+}
+
+/* Recent Purchases Ticker */
+.ticker-box {
+  background: #fcfbfa;
+  border: 1px solid rgba(255, 153, 51, 0.1);
+  border-radius: 14px;
+  padding: 10px 14px;
+  margin-top: 18px;
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--muted);
+  overflow: hidden;
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.02);
+}
+
+.ticker-content {
+  transition: opacity 0.35s ease-in-out;
+  line-height: 1.4;
+  opacity: 1;
+}
+
+.ticker-content strong {
+  color: var(--text);
+  font-weight: 700;
+}
+
+.ticker-content em {
+  color: var(--dark-bhagwa);
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* Certificate Domain Header URL */
+.cert-domain {
+  display: block;
+  font-size: 0.6rem;
+  color: var(--bhagwa);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin-top: 2px;
+}
+
+/* Metrics Grid inside Certificate */
+.cert-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 14px 0;
+  border-bottom: 1px solid rgba(255, 153, 51, 0.12);
+  border-top: 1px solid rgba(255, 153, 51, 0.12);
+  padding: 10px 0;
+}
+
+.cert-metric-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cert-metric-lbl {
+  font-size: 0.72rem;
+  color: var(--muted);
+  font-weight: 700;
+  margin-bottom: 3px;
+}
+
+.cert-metric-val {
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: var(--text);
+}
+
+.cert-metric-val.highlight {
+  color: #b54f07;
+  font-size: 0.82rem;
+  line-height: 1.2;
+}
+
+/* Certificate Pulse Progress */
+.cert-pulse-wrapper {
+  margin: 12px 0 16px;
+  text-align: left;
+}
+
+.cert-pulse-lbl {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.cert-pulse-track {
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(255, 153, 51, 0.12);
+  overflow: hidden;
+  position: relative;
+}
+
+.cert-pulse-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #ffb547 0%, #ff7c00 100%);
+  width: 0%;
+  transition: width 0.8s ease-in-out;
+}
+
+/* Landing Teaser Box Styling */
+.landing-teaser-box {
+  margin-bottom: 32px;
+  border-bottom: 2px dashed rgba(255, 153, 51, 0.2);
+  padding-bottom: 28px;
+  animation: slideIn 0.8s ease-out;
+}
+
+.teaser-heading {
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: var(--dark-bhagwa);
+  margin-bottom: 18px;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.certificate-card.sample-preview {
+  opacity: 0.85;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.04);
 }
