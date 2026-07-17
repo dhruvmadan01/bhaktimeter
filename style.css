@@ -663,35 +663,46 @@ body {
   }
 }
 
-/* GPay Name Verification UI Tweaks */
-.payment-instructions-box {
-  margin-top: 18px;
-  border-top: 1px solid rgba(0, 0, 0, 0.08);
-  padding-top: 18px;
+/* Simplified UPI ID Copy & Layout */
+.upi-id-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.payment-instructions-box label.step-label {
+.btn-copy-small {
+  background: rgba(255, 153, 51, 0.1);
+  color: var(--dark-bhagwa);
+  border: 1px solid rgba(255, 153, 51, 0.3);
+  border-radius: 8px;
+  padding: 5px 10px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 180ms ease, transform 180ms ease, border-color 180ms ease;
+}
+
+.btn-copy-small:hover {
+  background: rgba(255, 153, 51, 0.2);
+  border-color: var(--bhagwa);
+  transform: scale(1.02);
+}
+
+.verification-box {
+  margin-top: 14px;
+}
+
+.verification-box label {
   display: block;
   font-weight: 700;
-  font-size: 0.9rem;
-  margin-bottom: 12px;
+  font-size: 0.95rem;
+  margin-bottom: 8px;
   color: var(--text);
-}
-
-.mobile-fail-warning {
-  margin-top: 14px;
-  font-size: 0.8rem;
-  line-height: 1.5;
-  color: #c05621;
-  background: #fffaf0;
-  border: 1px solid #feebc8;
-  padding: 12px 14px;
-  border-radius: 12px;
 }
 
 .unlock-full-btn {
   width: 100%;
-  margin-top: 16px;
+  margin-top: 18px;
   padding: 14px 20px;
   font-size: 1.05rem;
   box-shadow: 0 10px 25px rgba(255, 153, 51, 0.22);
