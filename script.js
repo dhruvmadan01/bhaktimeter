@@ -26,6 +26,9 @@ const whatsappShareUnlockBtn = document.getElementById("whatsappShareUnlockBtn")
 const whatsappCountText = document.getElementById("whatsappCountText");
 const shareProgressFill = document.getElementById("shareProgressFill");
 
+// Bottom UPI Copy selector
+const copyBottomUpiBtn = document.getElementById("copyBottomUpiBtn");
+
 // Unlock & Results selectors
 const resultActions = document.getElementById("resultActions");
 const revealScoreBtn = document.getElementById("revealScoreBtn");
@@ -171,8 +174,10 @@ calculateBtn.addEventListener("click", (event) => {
   const total = q1 + q2 + q3 + q4;
   pendingScore = Math.round(Math.min(100, Math.max(0, total / 1.2)));
   
-  // Render results card immediately but blur/lock it
+  // Render results card
   showResult(pendingScore);
+
+  // Otherwise, blur/lock it and show the modal
   resultCard.classList.add("locked");
   resultActions.classList.add("hidden");
   revealScoreBtn.classList.remove("hidden");
@@ -305,6 +310,36 @@ whatsappShareUnlockBtn.addEventListener("click", () => {
     }, 1000);
   }
 });
+
+// Ad Watch to Unlock logic
+// Copy Bottom UPI ID function
+if (copyBottomUpiBtn) {
+  copyBottomUpiBtn.addEventListener("click", () => {
+    const upiIdText = "9315095214@fam";
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(upiIdText).then(() => {
+        showToast("UPI ID copied! Appreciate the support.");
+      }).catch(() => {
+        showToast("Failed to copy. Please manually copy: " + upiIdText);
+      });
+    } else {
+      const fallback = document.createElement("textarea");
+      fallback.value = upiIdText;
+      fallback.setAttribute("readonly", "");
+      fallback.style.position = "absolute";
+      fallback.style.left = "-9999px";
+      document.body.appendChild(fallback);
+      fallback.select();
+      try {
+        document.execCommand("copy");
+        showToast("UPI ID copied! Appreciate the support.");
+      } catch {
+        showToast("Failed to copy. Please manually copy: " + upiIdText);
+      }
+      document.body.removeChild(fallback);
+    }
+  });
+}
 
 resetBtn.addEventListener("click", resetForm);
 

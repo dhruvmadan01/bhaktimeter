@@ -1507,3 +1507,43 @@ body {
 }
 
 
+
+/* Overrides for Support Card at the bottom to maintain the warm, premium bhagwa aesthetics */
+.fivelakh-promo-card.support-card {
+  background: linear-gradient(135deg, #fffcf6 0%, #fff4e5 100%) !important;
+  border: 2px solid rgba(255, 153, 51, 0.4) !important;
+  color: var(--text) !important;
+  box-shadow: 0 12px 36px rgba(255, 153, 51, 0.08) !important;
+}
+
+.fivelakh-promo-card.support-card .fivelakh-brand-name {
+  color: var(--text) !important;
+}
+
+.fivelakh-promo-card.support-card .fivelakh-headline {
+  background: none !important;
+  -webkit-text-fill-color: initial !important;
+  color: var(--text) !important;
+}
+
+.fivelakh-promo-card.support-card .fivelakh-headline span {
+  background: rgba(255, 153, 51, 0.1) !important;
+  color: var(--dark-bhagwa) !important;
+  box-shadow: none !important;
+}
+
+.fivelakh-promo-card.support-card .fivelakh-tag {
+  background: white !important;
+  border: 1px solid rgba(255, 153, 51, 0.2) !important;
+  color: var(--text) !important;
+}
+
+.fivelakh-promo-card.support-card .fivelakh-tag.mutual { border-color: rgba(255, 153, 51, 0.4) !important; color: var(--dark-bhagwa) !important; }
+.fivelakh-promo-card.support-card .fivelakh-tag.equity { border-color: rgba(37, 211, 102, 0.4) !important; color: #1eaf53 !important; }
+.fivelakh-promo-card.support-card .fivelakh-tag.etfs { border-color: rgba(59, 130, 246, 0.4) !important; color: #1d4ed8 !important; }
+
+.fivelakh-promo-card.support-card p {
+  color: var(--muted) !important;
+}
+
+

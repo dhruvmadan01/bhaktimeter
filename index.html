@@ -36,9 +36,9 @@
       <!-- Highly visible Developer Note at the top of the page layout -->
       <div class="dev-note-box">
         <h4 class="dev-note-heading">👋 Quick Note from the Solo Developer</h4>
-        <p class="dev-note-text">Yo, server hosting fees on Vercel aren't free, and the traffic loop is wilding out right now. If you want to <strong>support a solo student developer</strong> without paying out of your own pocket, doing a quick free signup via the partner link at the bottom of the page pays for our database hosting tonight. It <strong>takes just 2 mins</strong>, totally online, and you only need basic details like Aadhaar & phone number. Appreciate the grind! 🤝</p>
+        <p class="dev-note-text">Yo, server hosting fees on Vercel aren't free, and the traffic loop is wilding out right now. If you want to <strong>support a solo student developer</strong>, you can scan the UPI QR code at the bottom of the page to contribute. Every contribution directly helps pay for server and database hosting tonight. Appreciate the support! 🤝</p>
         <div style="text-align: center;">
-          <button type="button" id="scrollToPartnerBtn" class="btn-dev-note-support">👇 Go to Partner Link (Free Support)</button>
+          <button type="button" id="scrollToPartnerBtn" class="btn-dev-note-support">👇 Go to Support QR Code</button>
         </div>
       </div>
 
@@ -188,9 +188,9 @@
           <!-- Highly visible Developer Note inside results card -->
           <div class="dev-note-box" style="margin-top: 24px; margin-bottom: 24px;">
             <h4 class="dev-note-heading">👋 Quick Note from the Solo Developer</h4>
-            <p class="dev-note-text">Yo, server hosting fees on Vercel aren't free, and the traffic loop is wilding out right now. If you want to <strong>support a solo student developer</strong> without paying out of your own pocket, doing a quick free signup via the partner link below pays for our database hosting tonight. It <strong>takes just 2 mins</strong>, totally online, and you only need basic details like Aadhaar & phone number. Appreciate the grind! 🤝</p>
+            <p class="dev-note-text">Yo, server hosting fees on Vercel aren't free, and the traffic loop is wilding out right now. If you want to <strong>support a solo student developer</strong>, you can scan the UPI QR code below to contribute. Every contribution directly helps pay for server and database hosting tonight. Appreciate the support! 🤝</p>
             <div style="text-align: center;">
-              <button type="button" id="scrollToPartnerBtn2" class="btn-dev-note-support">👇 Go to Partner Link (Free Support)</button>
+              <button type="button" id="scrollToPartnerBtn2" class="btn-dev-note-support">👇 Go to Support QR Code</button>
             </div>
           </div>
 
@@ -260,31 +260,30 @@
       </section>
     </main>
 
-    <!-- 5paisa Promotional Card -->
-    <div id="partnerLinkSection" class="fivelakh-promo-card">
+    <!-- UPI Support Card at the Bottom -->
+    <div id="partnerLinkSection" class="fivelakh-promo-card support-card">
       <div class="fivelakh-brand-header">
         <div class="fivelakh-logo-group">
-          <div class="fivelakh-icon-sq">5</div>
-          <span class="fivelakh-brand-name">5paisa</span>
+          <div class="fivelakh-icon-sq" style="background: var(--bhagwa);">★</div>
+          <span class="fivelakh-brand-name">Support Solo Developer</span>
         </div>
-        <span class="fivelakh-customers-badge">47 Lakh+ Customers</span>
+        <span class="fivelakh-customers-badge" style="background: rgba(255, 153, 51, 0.2); border-color: rgba(255, 153, 51, 0.4); color: var(--bhagwa);">UPI Support</span>
       </div>
-      <h3 class="fivelakh-headline">Join <span>47,00,000+</span> Traders & Investors</h3>
-      <div class="fivelakh-tags-grid">
-        <span class="fivelakh-tag mutual">Mutual Funds</span>
-        <span class="fivelakh-tag equity">Equity</span>
-        <span class="fivelakh-tag etfs">ETFs</span>
-        <span class="fivelakh-tag fo">F&O</span>
+      <h3 class="fivelakh-headline">Keep our Servers Running by <span>Supporting Us</span></h3>
+      <p style="font-size: 0.92rem; line-height: 1.6; margin-bottom: 20px;">
+        Vercel server hosting fees aren't free, and the traffic loop is wilding out right now! If you want to support a solo student developer, you can scan the UPI QR code below to contribute. Every contribution directly helps pay for database and server hosting tonight. Thank you so much!
+      </p>
+      
+      <div class="qr-support-container" style="display: flex; flex-direction: column; align-items: center; gap: 12px; background: white; border-radius: 20px; padding: 24px; max-width: 280px; margin: 0 auto 20px; box-shadow: 0 8px 24px rgba(0,0,0,0.04); border: 1px solid rgba(255, 153, 51, 0.15);">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=upi%3A%2F%2Fpay%3Fpa%3D9315095214%40fam%26pn%3DDhruv%2520Madan%26cu%3DINR%26tn%3DModi%2520Bhakti%2520Meter" alt="Scan to Support" style="width: 180px; height: 180px; border-radius: 12px;" />
+        <span style="font-size: 0.78rem; color: var(--muted); font-weight: 600;">Scan with GPay, PhonePe, Paytm, or BHIM</span>
       </div>
-      <ul class="fivelakh-features-list">
-        <li><span class="emoji">💰</span> Zero account opening charges</li>
-        <li><span class="emoji">🚀</span> Zero brokerage for up to 30 days</li>
-        <li><span class="emoji">👨🏻‍🏫</span> Expert advisory</li>
-        <li><span class="emoji">🧺</span> Place up to 10 orders with Basket Orders</li>
-      </ul>
-      <a href="https://sales.gromo.in/fp/DXJLribD1p" target="_blank" class="btn-fivelakh-action">
-        Open Free Demat Account
-      </a>
+
+      <div class="upi-id-support-row" style="display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap;">
+        <span style="font-size: 0.9rem; font-weight: 700; color: var(--text);">UPI ID:</span>
+        <span class="select-all" style="background: white; padding: 6px 12px; border-radius: 8px; border: 1px solid rgba(255, 153, 51, 0.2); font-family: monospace; font-weight: 700; font-size: 0.9rem; color: var(--text);">9315095214@fam</span>
+        <button type="button" id="copyBottomUpiBtn" class="btn-copy-small" style="font-size: 0.8rem; padding: 6px 12px;">Copy ID</button>
+      </div>
     </div>
 
 
