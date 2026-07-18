@@ -1446,4 +1446,38 @@ body {
   box-shadow: 0 6px 20px rgba(174, 34, 72, 0.35);
 }
 
+/* Developer Note Box Styling */
+.dev-note-box {
+  background: #fffbeb; /* Warm yellow/amber background */
+  border: 1.5px dashed var(--bhagwa);
+  border-radius: 16px;
+  padding: 16px 20px;
+  margin-top: 20px;
+  box-shadow: 0 6px 20px rgba(255, 153, 51, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dev-note-box:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(255, 153, 51, 0.12);
+}
+
+.dev-note-heading {
+  margin: 0 0 6px 0;
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--dark-bhagwa);
+  text-align: center;
+}
+
+.dev-note-text {
+  margin: 0;
+  font-size: 0.84rem;
+  line-height: 1.55;
+  color: #374151; /* Dark gray for high legibility */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  text-align: center;
+  font-weight: 500;
+}
+
 
