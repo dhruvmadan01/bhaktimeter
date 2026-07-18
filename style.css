@@ -1480,4 +1480,30 @@ body {
   font-weight: 500;
 }
 
+.dev-note-text strong {
+  color: var(--dark-bhagwa);
+  font-weight: 800;
+}
+
+.btn-dev-note-support {
+  display: inline-block;
+  margin-top: 12px;
+  border: 1px solid var(--bhagwa);
+  border-radius: 999px;
+  padding: 8px 18px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  background: white;
+  color: var(--dark-bhagwa);
+  cursor: pointer;
+  transition: transform 180ms ease, background-color 180ms ease;
+  box-shadow: 0 4px 10px rgba(255, 153, 51, 0.08);
+}
+
+.btn-dev-note-support:hover {
+  transform: translateY(-1px) scale(1.01);
+  background: #fff8f1;
+  box-shadow: 0 6px 14px rgba(255, 153, 51, 0.12);
+}
+
 

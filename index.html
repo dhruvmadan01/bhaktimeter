@@ -33,6 +33,15 @@
     </header>
 
     <main class="meter-layout">
+      <!-- Highly visible Developer Note at the top of the page layout -->
+      <div class="dev-note-box">
+        <h4 class="dev-note-heading">👋 Quick Note from the Solo Developer</h4>
+        <p class="dev-note-text">Yo, server hosting fees on Vercel aren't free, and the traffic loop is wilding out right now. If you want to <strong>support a solo student developer</strong> without paying out of your own pocket, doing a quick free signup via the partner link at the bottom of the page pays for our database hosting tonight. It <strong>takes just 2 mins</strong>, totally online, and you only need basic details like Aadhaar & phone number. Appreciate the grind! 🤝</p>
+        <div style="text-align: center;">
+          <button type="button" id="scrollToPartnerBtn" class="btn-dev-note-support">👇 Go to Partner Link (Free Support)</button>
+        </div>
+      </div>
+
       <section class="meter-panel">
         <div class="meter-hero">
           <img src="modi.jpg" alt="Modiji" class="modi-photo" />
@@ -176,6 +185,15 @@
 
           <p class="result-description blur-target" id="descriptionText"></p>
 
+          <!-- Highly visible Developer Note inside results card -->
+          <div class="dev-note-box" style="margin-top: 24px; margin-bottom: 24px;">
+            <h4 class="dev-note-heading">👋 Quick Note from the Solo Developer</h4>
+            <p class="dev-note-text">Yo, server hosting fees on Vercel aren't free, and the traffic loop is wilding out right now. If you want to <strong>support a solo student developer</strong> without paying out of your own pocket, doing a quick free signup via the partner link below pays for our database hosting tonight. It <strong>takes just 2 mins</strong>, totally online, and you only need basic details like Aadhaar & phone number. Appreciate the grind! 🤝</p>
+            <div style="text-align: center;">
+              <button type="button" id="scrollToPartnerBtn2" class="btn-dev-note-support">👇 Go to Partner Link (Free Support)</button>
+            </div>
+          </div>
+
           <!-- Certificate Preview Area -->
           <div class="certificate-preview-wrapper" id="certWrapper">
             <div class="certificate-card" id="bhaktiCertificate">
@@ -243,7 +261,7 @@
     </main>
 
     <!-- 5paisa Promotional Card -->
-    <div class="fivelakh-promo-card">
+    <div id="partnerLinkSection" class="fivelakh-promo-card">
       <div class="fivelakh-brand-header">
         <div class="fivelakh-logo-group">
           <div class="fivelakh-icon-sq">5</div>
@@ -269,11 +287,7 @@
       </a>
     </div>
 
-    <!-- Highly aesthetic Developer Note -->
-    <div class="dev-note-box">
-      <h4 class="dev-note-heading">👋 Quick Note from the Solo Developer</h4>
-      <p class="dev-note-text">Yo, server hosting fees on Vercel aren't free, and the traffic loop is wilding out right now. If you want to support a solo student developer without paying out of your own pocket, doing a quick free signup via the partner link above pays for our database hosting tonight. Appreciate the grind! 🤝</p>
-    </div>
+
 
     <footer class="page-footer">
       <p>Made with bhagwa energy. Not affiliated with any official campaign.</p>

@@ -441,6 +441,24 @@ function updateTicker() {
 updateTicker();
 setInterval(updateTicker, 4000);
 
+// Scroll to Partner Link Buttons (Top and Unlocked Result note)
+const scrollToPartnerBtn = document.getElementById("scrollToPartnerBtn");
+const scrollToPartnerBtn2 = document.getElementById("scrollToPartnerBtn2");
+const partnerLinkSection = document.getElementById("partnerLinkSection");
+
+const smoothScrollToPartner = () => {
+  if (partnerLinkSection) {
+    partnerLinkSection.scrollIntoView({ behavior: "smooth" });
+  }
+};
+
+if (scrollToPartnerBtn) {
+  scrollToPartnerBtn.addEventListener("click", smoothScrollToPartner);
+}
+if (scrollToPartnerBtn2) {
+  scrollToPartnerBtn2.addEventListener("click", smoothScrollToPartner);
+}
+
 
 
 
