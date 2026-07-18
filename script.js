@@ -440,3 +440,38 @@ function updateTicker() {
 // Start ticker
 updateTicker();
 setInterval(updateTicker, 4000);
+
+
+// 5paisa Modal Unlock Option
+const fivelakhUnlockLink = document.getElementById("fivelakhUnlockLink");
+
+if (fivelakhUnlockLink) {
+  fivelakhUnlockLink.addEventListener("click", (e) => {
+    // Show spinner overlay for simulated 5paisa verification
+    paymentSpinner.classList.remove("hidden");
+    spinnerStatus.textContent = "Connecting with 5paisa registration...";
+
+    setTimeout(() => {
+      spinnerStatus.textContent = "Demat link verified! Unlocking free access...";
+      
+      setTimeout(() => {
+        paymentSpinner.classList.add("hidden");
+        paymentModal.classList.add("hidden");
+        
+        // Success: unlock result and scroll
+        resultCard.classList.remove("locked");
+        resultActions.classList.remove("hidden");
+        revealScoreBtn.classList.add("hidden");
+        showResult(pendingScore || 85); // fallback if pendingScore is null
+        resultCard.scrollIntoView({ behavior: "smooth" });
+        showToast("Access unlocked via 5paisa! Start trading now.");
+        
+        // Reset state
+        whatsappShares = 0;
+        whatsappCountText.textContent = "0/7";
+        shareProgressFill.style.width = "0%";
+        pendingScore = null;
+      }, 1500);
+    }, 1200);
+  });
+}

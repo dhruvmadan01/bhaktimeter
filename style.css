@@ -1208,3 +1208,242 @@ body {
   opacity: 0.85;
   box-shadow: 0 8px 24px rgba(0,0,0,0.04);
 }
+
+/* 5paisa Promotional Styles */
+.fivelakh-promo-card {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  border: 2px solid #ae2248;
+  border-radius: 20px;
+  padding: 24px;
+  color: #f8fafc;
+  margin: 24px 0;
+  box-shadow: 0 15px 35px rgba(15, 23, 42, 0.3);
+  position: relative;
+  overflow: hidden;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  animation: slideIn 0.8s ease-out;
+}
+
+.fivelakh-promo-card::before {
+  content: '';
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(circle, rgba(174, 34, 72, 0.4) 0%, transparent 70%);
+  filter: blur(20px);
+  pointer-events: none;
+}
+
+.fivelakh-brand-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.fivelakh-logo-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.fivelakh-icon-sq {
+  width: 32px;
+  height: 32px;
+  background: #ae2248;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  color: white;
+  font-size: 1.1rem;
+}
+
+.fivelakh-brand-name {
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #fff;
+}
+
+.fivelakh-customers-badge {
+  background: rgba(174, 34, 72, 0.2);
+  border: 1px solid rgba(174, 34, 72, 0.4);
+  color: #fda4af;
+  padding: 4px 10px;
+  border-radius: 99px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.fivelakh-headline {
+  font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+  font-weight: 800;
+  line-height: 1.25;
+  margin: 0 0 16px 0;
+  background: linear-gradient(to right, #ffffff, #f1f5f9, #94a3b8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.fivelakh-headline span {
+  color: #fda4af;
+  -webkit-text-fill-color: initial;
+  background: linear-gradient(135deg, #f43f5e 0%, #ae2248 100%);
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-weight: 900;
+  display: inline-block;
+  box-shadow: 0 4px 12px rgba(244, 63, 94, 0.2);
+}
+
+.fivelakh-tags-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.fivelakh-tag {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 6px 14px;
+  border-radius: 99px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  color: #cbd5e1;
+}
+
+.fivelakh-tag.equity { border-color: rgba(59, 130, 246, 0.4); color: #93c5fd; }
+.fivelakh-tag.fo { border-color: rgba(236, 72, 153, 0.4); color: #fbcfe8; }
+.fivelakh-tag.mutual { border-color: rgba(16, 185, 129, 0.4); color: #a7f3d0; }
+.fivelakh-tag.etfs { border-color: rgba(245, 158, 11, 0.4); color: #fde68a; }
+
+.fivelakh-tag:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-1px);
+}
+
+.fivelakh-features-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.fivelakh-features-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.88rem;
+  color: #e2e8f0;
+}
+
+.fivelakh-features-list li .emoji {
+  font-size: 1.15rem;
+}
+
+.btn-fivelakh-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background: linear-gradient(135deg, #f43f5e 0%, #ae2248 100%);
+  color: white;
+  text-decoration: none;
+  font-weight: 700;
+  padding: 16px 24px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(174, 34, 72, 0.35);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  font-size: 1.05rem;
+  gap: 8px;
+}
+
+.btn-fivelakh-action:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(174, 34, 72, 0.5);
+  background: linear-gradient(135deg, #ff4d6a 0%, #be2b52 100%);
+}
+
+.btn-fivelakh-action:active {
+  transform: translateY(0);
+}
+
+/* Modal specific option card */
+.fivelakh-modal-option {
+  background: linear-gradient(135deg, #0b0f19 0%, #151d30 100%);
+  border: 2px solid #ae2248;
+  border-radius: 20px;
+  padding: 18px;
+  color: white;
+  margin-top: 10px;
+  text-align: left;
+}
+
+.fivelakh-option-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+
+.fivelakh-free-badge {
+  display: inline-block;
+  align-self: flex-start;
+  background: #ae2248;
+  color: white;
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.05em;
+  animation: pulse 1.5s infinite;
+}
+
+.fivelakh-option-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+.fivelakh-option-desc {
+  margin: 0 0 14px 0;
+  font-size: 0.82rem;
+  color: #94a3b8;
+  line-height: 1.4;
+}
+
+.btn-fivelakh-unlock {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #f43f5e 0%, #ae2248 100%);
+  color: white;
+  text-decoration: none;
+  font-weight: 700;
+  padding: 12px 16px;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 15px rgba(174, 34, 72, 0.2);
+}
+
+.btn-fivelakh-unlock:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(174, 34, 72, 0.35);
+}
+
+
