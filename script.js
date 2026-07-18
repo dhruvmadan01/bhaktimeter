@@ -181,7 +181,7 @@ calculateBtn.addEventListener("click", (event) => {
   // Clear any previous input, reset sharing progress, and open payment modal
   payerNameInput.value = "";
   whatsappShares = 0;
-  whatsappCountText.textContent = "0/3";
+  whatsappCountText.textContent = "0/7";
   shareProgressFill.style.width = "0%";
   paymentSpinner.classList.add("hidden");
   paymentModal.classList.remove("hidden");
@@ -268,17 +268,15 @@ whatsappShareUnlockBtn.addEventListener("click", () => {
   window.open(whatsappUrl, "_blank");
 
   // Increment click shares
-  whatsappShares = Math.min(3, whatsappShares + 1);
+  whatsappShares = Math.min(7, whatsappShares + 1);
   
   // Update progress UI
-  whatsappCountText.textContent = `${whatsappShares}/3`;
-  shareProgressFill.style.width = `${(whatsappShares / 3) * 100}%`;
+  whatsappCountText.textContent = `${whatsappShares}/7`;
+  shareProgressFill.style.width = `${(whatsappShares / 7) * 100}%`;
 
-  if (whatsappShares === 1) {
-    showToast("Shared 1/3! Share with 2 more friends/groups on WhatsApp.");
-  } else if (whatsappShares === 2) {
-    showToast("Shared 2/3! Share with 1 more friend/group on WhatsApp.");
-  } else if (whatsappShares >= 3) {
+  if (whatsappShares < 7) {
+    showToast(`Shared ${whatsappShares}/7! Share with ${7 - whatsappShares} more friends/groups on WhatsApp.`);
+  } else if (whatsappShares >= 7) {
     // Show spinner overlay for simulated verification
     paymentSpinner.classList.remove("hidden");
     spinnerStatus.textContent = "Verifying WhatsApp shares...";
@@ -300,7 +298,7 @@ whatsappShareUnlockBtn.addEventListener("click", () => {
         
         // Reset state
         whatsappShares = 0;
-        whatsappCountText.textContent = "0/3";
+        whatsappCountText.textContent = "0/7";
         shareProgressFill.style.width = "0%";
         pendingScore = null;
       }, 1200);
