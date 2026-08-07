@@ -405,12 +405,12 @@ body {
 
 .modal-content {
   background: white;
-  width: 90%;
-  max-width: 500px;
+  width: 95%;
+  max-width: 760px;
   border-radius: 28px;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
   border: 1px solid rgba(255, 153, 51, 0.2);
-  padding: 32px;
+  padding: 24px;
   position: relative;
   animation: pop 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   max-height: 90vh;
@@ -728,27 +728,26 @@ body {
 /* WhatsApp Viral Loop Divider & Progress Box */
 .divider-row {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  text-align: center;
-  margin: 22px 0;
+  justify-content: center;
   color: var(--muted);
   font-size: 0.85rem;
   font-weight: 700;
+  min-width: 40px;
+  position: relative;
 }
 
 .divider-row::before,
 .divider-row::after {
   content: '';
   flex: 1;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  border-left: 1px solid rgba(0, 0, 0, 0.08);
+  width: 1px;
 }
 
-.divider-row:not(:empty)::before {
-  margin-right: .5em;
-}
-
-.divider-row:not(:empty)::after {
-  margin-left: .5em;
+.divider-row span {
+  padding: 12px 0;
 }
 
 .viral-share-box {
@@ -1544,6 +1543,155 @@ body {
 
 .fivelakh-promo-card.support-card p {
   color: var(--muted) !important;
+}
+
+/* Teaser & Pre-Quiz Disclaimer styling */
+.teaser-unlock-methods-info {
+  font-size: 0.92rem;
+  color: var(--muted);
+  text-align: center;
+  margin-top: -8px;
+  margin-bottom: 22px;
+  background: rgba(255, 153, 51, 0.08);
+  border: 1px dashed rgba(255, 153, 51, 0.3);
+  border-radius: 12px;
+  padding: 10px 14px;
+  line-height: 1.45;
+  font-weight: 500;
+}
+
+.pre-quiz-disclaimer {
+  font-size: 0.88rem;
+  color: var(--muted);
+  text-align: center;
+  margin-top: 16px;
+  margin-bottom: 12px;
+  padding: 12px 16px;
+  background: rgba(255, 153, 51, 0.07);
+  border: 1px dashed rgba(255, 153, 51, 0.25);
+  border-radius: 14px;
+  line-height: 1.5;
+}
+
+/* Unlock Option Cards inside Modal */
+.unlock-option-card {
+  border-radius: 20px;
+  padding: 20px;
+  transition: transform 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
+  position: relative;
+}
+
+.unlock-option-card:hover {
+  transform: translateY(-2px);
+}
+
+.unlock-option-card.pay-option-card {
+  background: #fffdfb;
+  border: 2px solid rgba(255, 153, 51, 0.16);
+}
+
+.unlock-option-card.pay-option-card:hover {
+  border-color: rgba(255, 153, 51, 0.35);
+  box-shadow: 0 10px 25px rgba(255, 153, 51, 0.08);
+}
+
+.unlock-option-card.share-option-card {
+  background: #f7fdfa;
+  border: 2px solid rgba(37, 211, 102, 0.16);
+}
+
+.unlock-option-card.share-option-card:hover {
+  border-color: rgba(37, 211, 102, 0.35);
+  box-shadow: 0 10px 25px rgba(37, 211, 102, 0.08);
+}
+
+.option-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  padding-bottom: 12px;
+}
+
+.option-card-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.option-badge {
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 6px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.option-badge.pay {
+  background: rgba(255, 153, 51, 0.12);
+  color: var(--dark-bhagwa);
+}
+
+.option-badge.share {
+  background: rgba(37, 211, 102, 0.12);
+  color: #1eaf53;
+}
+
+/* Modal Inner Spacing Tweaks */
+.payment-body {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: stretch;
+}
+
+.unlock-option-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: space-between;
+}
+
+.viral-share-box {
+  margin-top: 0;
+  padding: 0;
+  background: transparent;
+  border: none;
+}
+
+/* Responsive side-by-side vs stacked layout */
+@media (max-width: 768px) {
+  .payment-body {
+    flex-direction: column;
+  }
+
+  .divider-row {
+    flex-direction: row;
+    margin: 12px 0;
+    min-height: auto;
+  }
+
+  .divider-row::before,
+  .divider-row::after {
+    border-left: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    width: auto;
+    height: auto;
+  }
+
+  .divider-row span {
+    padding: 0 12px;
+  }
+
+  .unlock-option-card {
+    width: 100%;
+  }
 }
 
 
